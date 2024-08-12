@@ -50,12 +50,10 @@ const SignUpForm = () => {
   async function onSubmit(values: z.infer<typeof signUpValidation>) {
     const newUser = await createUserAccount(values);
 
-    console.log(newUser);
-
     if (!newUser) {
       toast({
         variant: "destructive",
-        title: "Opps!, Something went wrong",
+        description: "Opps!, Something went wrong",
       });
       return;
     }
@@ -64,8 +62,6 @@ const SignUpForm = () => {
       email: values.email,
       password: values.password,
     });
-
-    console.log(session);
 
     if (!session) {
       return toast({
@@ -78,6 +74,7 @@ const SignUpForm = () => {
 
     if (isLoggedIn) {
       form.reset();
+      toast({ title: "Account created successfully 🥳" });
       navigate("/");
     } else {
       toast({ title: "signUp failed, Please try again" });

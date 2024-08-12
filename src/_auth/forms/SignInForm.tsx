@@ -23,7 +23,7 @@ import { useUserContext } from "@/context/AuthContext";
 const SignUpForm = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { checkAuthUser, isLoading } = useUserContext();
+  const { checkAuthUser, isLoading, user } = useUserContext();
 
   const { mutateAsync: signInAccount, isPending: isSigningIn } =
     useSignInAccount();
@@ -40,21 +40,20 @@ const SignUpForm = () => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof signInValidation>) {
     const session = await signInAccount(values);
-    console.log(values);
     if (!session) {
       toast({
         variant: "destructive",
-        title: "Opps!, Sign In falied",
+        description: "Opps!, Sign In falied",
       });
 
       return;
     }
 
     const isLoggedIn = await checkAuthUser();
-    console.log(isLoggedIn);
 
     if (isLoggedIn) {
       form.reset();
+      toast({ title: `Welcome back ${user.name} 🥳` });
       navigate("/");
     } else {
       return toast({ title: "signUp failed, Please try again" });

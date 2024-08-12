@@ -1,0 +1,40 @@
+import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
+
+const MenuBar = ({ signOut, setMenuModel, menuModel }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    signOut();
+  };
+
+  const handleClickV2 = () => {
+    navigate("/explore");
+  };
+
+  return (
+    <div onClick={() => setMenuModel(!menuModel)} className="menu-container">
+      <div className="flex flex-col gap-5 w-full">
+        <div onClick={handleClickV2} className=" flex flex-row gap-3">
+          <img src="/assets/icons/wallpaper.svg" alt="explore" />
+          <span>Explore</span>
+        </div>
+        <div className=" flex flex-row gap-3">
+          <img src="/assets/icons/notification.svg" alt="Notification" />
+          <span>Notification</span>
+        </div>
+        <div className=" flex flex-row gap-3">
+          <img src="/assets/icons/settings.svg" alt="settings" />
+          <span>Settings</span>
+        </div>
+        <Button
+          onClick={handleClick}
+          className="bg-[#ff5a5a] hover:bg-[#f43030] w-full text-light-1 flex gap-2"
+        >
+          Logout
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default MenuBar;
