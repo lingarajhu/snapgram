@@ -31,7 +31,7 @@ const AllUsers = () => {
       <div className="w-full overflow-scroll custom-scrollbar">
         {users?.pages &&
           users?.pages.map((user, index) => {
-            return <UserCard users={user?.documents} key={`users-${index}`} />;
+            return <UserCard users={user!.documents} key={`users-${index}`} />;
           })}
         {hasNextPage && (
           <div ref={ref} className="mt-8 flex-center">

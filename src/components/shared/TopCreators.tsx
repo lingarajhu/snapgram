@@ -3,14 +3,14 @@ import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 
 type TopCreatorsProps = {
-  users: Models.Document;
+  users: Models.Document[];
 };
 
 const TopCreators = ({ users }: TopCreatorsProps) => {
   return (
     <div className="top_creators-grid mt-8">
       {users &&
-        users?.map((user, index) => (
+        users?.map((user: Models.Document, index: number) => (
           <div className="user-card" key={`user-${index}`}>
             <Link
               className="flex flex-col gap-2 items-center"

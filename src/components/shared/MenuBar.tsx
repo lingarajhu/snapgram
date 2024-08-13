@@ -1,7 +1,18 @@
+import React from "react";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 
-const MenuBar = ({ signOut, setMenuModel, menuModel }) => {
+type MenuBarProps = {
+  signOut: () => Promise<void>;
+  setMenuModel: React.Dispatch<React.SetStateAction<boolean>>;
+  menuModel: boolean;
+};
+
+const MenuBar: React.FC<MenuBarProps> = ({
+  signOut,
+  setMenuModel,
+  menuModel,
+}) => {
   const navigate = useNavigate();
   const handleClick = () => {
     signOut();

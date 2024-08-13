@@ -3,14 +3,14 @@ import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
 
 type UserCardProps = {
-  users: Models.Document;
+  users: Models.Document[];
 };
 
 const UserCard = ({ users }: UserCardProps) => {
   return (
     <div className="w-full user-grid mt-8">
       {users &&
-        users?.map((user, index) => (
+        users?.map((user: Models.Document, index: number) => (
           <div className="user-card" key={`user-${index}`}>
             <Link
               className="flex flex-col gap-2 items-center"

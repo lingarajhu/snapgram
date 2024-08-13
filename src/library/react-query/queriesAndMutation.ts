@@ -4,7 +4,6 @@ import {
   useMutation,
   useQueryClient,
   useInfiniteQuery,
-  QueryClient,
 } from "@tanstack/react-query";
 import {
   createPost,
@@ -210,7 +209,7 @@ export function useSearchPost(searchTerm: string) {
 export function useGetUsers() {
   return useInfiniteQuery({
     queryKey: [QUERY_KEYS.GET_USERS],
-    queryFn: getUsers,
+    queryFn: getUsers
     getNextPageParam: (lastPage) => {
       if (lastPage && lastPage?.documents?.length === 0) return null;
 

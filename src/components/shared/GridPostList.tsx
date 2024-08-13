@@ -18,7 +18,7 @@ const GridPostList = ({
 
   return (
     <ul className="grid-container">
-      {posts.map((post) => {
+      {posts.map((post: Models.Document) => {
         return (
           <li key={post.$id} className="relative min-w-72 h-80">
             <Link to={`/post/${post.$id}`} className="grid-post_link">

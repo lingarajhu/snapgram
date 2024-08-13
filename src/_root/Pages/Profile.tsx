@@ -2,6 +2,7 @@ import Loader from "@/components/shared/Loader";
 import { Button } from "@/components/ui/button";
 import { useUserContext } from "@/context/AuthContext";
 import { useGetUserProfile } from "@/library/react-query/queriesAndMutation";
+import { Models } from "appwrite";
 import { useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
@@ -132,7 +133,7 @@ const Profile = () => {
             </div>
           ) : (
             <ul className="grid-container">
-              {currentUser?.posts?.map((post) => {
+              {currentUser?.posts?.map((post: Models.Document) => {
                 return (
                   <li className="relative min-w-64 h-64" key={post?.$id}>
                     <Link to={`/post/${post.$id}`} className="grid-post_link">

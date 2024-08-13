@@ -1,5 +1,6 @@
 import Loader from "@/components/shared/Loader";
 import { useGetCurrentUser } from "@/library/react-query/queriesAndMutation";
+import { Models } from "appwrite";
 
 const Saved = () => {
   const { data, isLoading } = useGetCurrentUser();
@@ -24,7 +25,7 @@ const Saved = () => {
       </div>
       <ul className="saved-grid">
         {data?.save &&
-          data?.save.map((item, index) => (
+          data?.save.map((item: Models.Document, index: number) => (
             <li
               className="relative md:min-w-80 md:h-80 min-w-64 h-72"
               key={`saved-${index}`}
