@@ -2,6 +2,7 @@ import Loader from "@/components/shared/Loader";
 import { Button } from "@/components/ui/button";
 import { useUserContext } from "@/context/AuthContext";
 import { useGetUserProfile } from "@/library/react-query/queriesAndMutation";
+import { useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
 const Profile = () => {
@@ -10,7 +11,10 @@ const Profile = () => {
   const { data: currentUser } = useGetUserProfile(id || "");
   const navigate = useNavigate();
 
-  console.log(window.screen.width);
+  useEffect(() => {
+    // console.log(user?.imageUrl);
+  }, [user?.imageUrl]);
+
   if (!currentUser) {
     return (
       <div className="flex-center w-full h-full">
@@ -26,7 +30,7 @@ const Profile = () => {
           <img
             src={currentUser?.imageUrl}
             alt="profile-picture"
-            className="md:w-32 md:h-32 w-20 h-20 rounded-full"
+            className="md:w-32 md:h-32 w-20 h-20 rounded-full object-cover object-top"
           />
         </div>
         <div className="flex flex-col gap-3 w-full">
@@ -75,7 +79,7 @@ const Profile = () => {
               Following
             </span>
           </div>
-          <p className="max-w-80 text-justify">{currentUser?.bio}</p>
+          <p className="max-w-lg text-justify">{currentUser?.bio}</p>
           {!(user.id === currentUser?.$id) && (
             <div className="flex flex-row md:gap-8 gap-6 items-center justify-center lg:items-start lg:justify-start w-full">
               <Button className="shad-button_primary">Follow</Button>

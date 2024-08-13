@@ -1,9 +1,17 @@
 import ProfileEditForm from "@/components/forms/ProfileEditForm";
+import Loader from "@/components/shared/Loader";
 import { useUserContext } from "@/context/AuthContext";
 
 const UpdateProfile = () => {
   const { user } = useUserContext();
-  console.log(user);
+
+  if (!user) {
+    return (
+      <div className="flex flex-1 justify-center items-center w-full">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-1">

@@ -85,7 +85,7 @@ export async function getCurrentUser() {
 
     return currentUser.documents[0];
   } catch (error) {
-    console.log(error);
+    console.log("errrorr...", error);
   }
 }
 
