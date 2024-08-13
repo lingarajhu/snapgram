@@ -22,7 +22,7 @@ const ProfilePhotoUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
     [file]
   );
 
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps, open } = useDropzone({
     onDrop,
     accept: {
       "image/*": [".png", ".jpeg", ".jpg", ".svg"],
@@ -43,7 +43,7 @@ const ProfilePhotoUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
               alt="uploaded Image"
               className="lg:w-40 lg:h-40 w-28 h-28 rounded-full object-cover object-top"
             />
-            <p className="text-primary-600 lg:h3-bold text-lg">
+            <p onClick={open} className="text-primary-600 lg:h3-bold text-lg">
               Change Profile Photo
             </p>
           </div>
@@ -55,7 +55,7 @@ const ProfilePhotoUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
             className="lg:w-40 lg:h-40 w-28 h-28 object-cover object-top rounded-full"
             alt="upload"
           />
-          <p className="text-primary-600 lg:h3-bold text-lg">
+          <p onClick={open} className="text-primary-600 lg:h3-bold text-lg">
             Change Profile Photo
           </p>
         </div>

@@ -1,5 +1,4 @@
 import { IUser } from "@/library/types";
-import React from "react";
 import { UpdateProfileValidation } from "@/library/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -54,7 +53,7 @@ const ProfileEditForm = ({ currentUser }: ProfileEditFormProps) => {
       toast({ title: "Please try again" });
     }
 
-    return navigate(`/profile/${user.id}`);
+    return navigate(`/profile/${currentUser.id}`);
   }
 
   return (
