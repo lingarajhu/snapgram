@@ -299,4 +299,8 @@
   .shad-button_ghost {
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
   }
+
+  .shad-logout-button {
+    @apply flex py-7 gap-4 items-center justify-start bg-transparent hover:bg-red transition !important;
+  }
 }
