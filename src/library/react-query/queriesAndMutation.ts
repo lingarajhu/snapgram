@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   useQuery,
@@ -27,6 +28,7 @@ import {
 } from "../appWrite/api";
 import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "../types";
 import { QUERY_KEYS } from "./queryKeys";
+import { Models } from "appwrite";
 
 export function useCreateUserAccount() {
   return useMutation({
@@ -63,8 +65,9 @@ export function useCreatePost() {
 export function useGetRecentPosts() {
   return useInfiniteQuery({
     queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
-    queryFn: getRecentPosts,
-    getNextPageParam: (lastPage) => {
+    queryFn: getRecentPosts as any,
+    initialPageParam: undefined,
+    getNextPageParam: (lastPage: Models.DocumentList<Models.Document>) => {
       if (lastPage && lastPage.documents.length === 0) return null;
 
       const lastId = lastPage?.documents[lastPage?.documents.length - 1].$id;
@@ -187,8 +190,9 @@ export function useDeletePost() {
 export function useGetPosts() {
   return useInfiniteQuery({
     queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
-    queryFn: getInfinitePosts,
-    getNextPageParam: (lastPage) => {
+    queryFn: getInfinitePosts as any,
+    initialPageParam: undefined,
+    getNextPageParam: (lastPage: Models.DocumentList<Models.Document>) => {
       if (lastPage && lastPage.documents.length === 0) return null;
 
       const lastId = lastPage?.documents[lastPage.documents.length - 1].$id;
@@ -209,8 +213,9 @@ export function useSearchPost(searchTerm: string) {
 export function useGetUsers() {
   return useInfiniteQuery({
     queryKey: [QUERY_KEYS.GET_USERS],
-    queryFn: getUsers,
-    getNextPageParam: (lastPage) => {
+    queryFn: getUsers as any,
+    initialPageParam: undefined,
+    getNextPageParam: (lastPage: Models.DocumentList<Models.Document>) => {
       if (lastPage && lastPage?.documents?.length === 0) return null;
 
       const lastId = lastPage?.documents[lastPage.documents.length - 1].$id;
