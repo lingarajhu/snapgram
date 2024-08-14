@@ -190,14 +190,18 @@ export async function getRecentPosts({ pageParam }: { pageParam: number }) {
     queries.push(Query.cursorAfter(pageParam.toString()));
   }
 
-  const posts = await databases.listDocuments(
-    appwriteConfig.databaseId,
-    appwriteConfig.postsCollectionId,
-    queries
-  );
-  if (!posts) throw Error;
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      queries
+    );
+    if (!posts) throw Error;
 
-  return posts;
+    return posts;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function likePost(postId: string, likesArray: string[]) {

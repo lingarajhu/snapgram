@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 
 type MenuBarProps = {
-  signOut: () => Promise<void>;
+  signOut: () => void;
   setMenuModel: React.Dispatch<React.SetStateAction<boolean>>;
   menuModel: boolean;
 };
