@@ -38,7 +38,7 @@ const Home = () => {
             <>
               <ul className="flex flex-col flex-1 gap-9 w-full">
                 {posts?.pages.map((post, index) => (
-                  <PostCard posts={post.documents} key={`post-${index}`} />
+                  <PostCard posts={post!.documents} key={`post-${index}`} />
                 ))}
               </ul>
 
