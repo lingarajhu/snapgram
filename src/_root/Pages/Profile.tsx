@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useUserContext } from "@/context/AuthContext";
 import { useGetUserProfile } from "@/library/react-query/queriesAndMutation";
 import { Models } from "appwrite";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
 const Profile = () => {
@@ -11,6 +11,7 @@ const Profile = () => {
   const { user } = useUserContext();
   const { data: currentUser } = useGetUserProfile(id || "");
   const navigate = useNavigate();
+  const [showPosts, setShowPosts] = useState<boolean>(true);
 
   useEffect(() => {
     // console.log(user?.imageUrl);
@@ -104,8 +105,25 @@ const Profile = () => {
               Edit Profile
             </Button>
           </Link>
-          <div className="flex-between max-w-5xl w-full mt-10 mb-7">
-            <h3 className="body-bold md:h3-bold">Posts By you</h3>
+          <div className="flex-between max-w-5xl px-1 w-full mt-10 mb-2">
+            <div className="flex justify-center items-center">
+              <Button
+                onClick={() => setShowPosts(true)}
+                className={`h-10 bg-dark-4 px-4 text-light-1 flex gap-2 rounded-r-none ${
+                  !showPosts && "bg-dark-3"
+                }`}
+              >
+                Posts
+              </Button>
+              <Button
+                onClick={() => setShowPosts(false)}
+                className={`h-10 bg-dark-4 px-4 text-light-1 flex gap-2 rounded-l-none ${
+                  showPosts && "bg-dark-3"
+                }`}
+              >
+                Saved
+              </Button>
+            </div>
             <div className="flex-center gap-3 bg-dark-3 rounded-xl px-4 py-2 cursor-pointer">
               <p className="small-medium md:base-medium text-light-2">All</p>
               <img
@@ -116,37 +134,82 @@ const Profile = () => {
               />
             </div>
           </div>
-          {currentUser?.posts.length === 0 ? (
-            <div className="max-w-5xl h-80 rounded-lg bg-dark-3 flex items-center justify-center flex-col">
-              <img
-                src="/assets/icons/posts.svg"
-                alt="posts"
-                className="md:w-20 md:h-20 w-14 h-14"
-              />
-              <p className="h3-bold md:h2-bold text-light-3">No posts yet</p>
-              <p
-                onClick={() => navigate("/create-post")}
-                className="text-primary-500 cursor-pointer hover:underline"
-              >
-                Create Post?...
-              </p>
-            </div>
+          {showPosts ? (
+            <>
+              {currentUser?.posts.length === 0 ? (
+                <div className="max-w-5xl h-80 rounded-lg bg-dark-3 flex items-center justify-center flex-col">
+                  <img
+                    src="/assets/icons/posts.svg"
+                    alt="posts"
+                    className="md:w-20 md:h-20 w-14 h-14"
+                  />
+                  <p className="h3-bold md:h2-bold text-light-3">
+                    No posts yet
+                  </p>
+                  <p
+                    onClick={() => navigate("/create-post")}
+                    className="text-primary-500 cursor-pointer hover:underline"
+                  >
+                    Create Post?...
+                  </p>
+                </div>
+              ) : (
+                <ul className="grid-container">
+                  {currentUser?.posts?.map((post: Models.Document) => {
+                    return (
+                      <li className="relative min-w-64 h-64" key={post?.$id}>
+                        <Link
+                          to={`/post/${post.$id}`}
+                          className="grid-post_link"
+                        >
+                          <img
+                            src={post.imageUrl}
+                            alt="post"
+                            className="h-full w-full object-cover"
+                          />
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </>
           ) : (
-            <ul className="grid-container">
-              {currentUser?.posts?.map((post: Models.Document) => {
-                return (
-                  <li className="relative min-w-64 h-64" key={post?.$id}>
-                    <Link to={`/post/${post.$id}`} className="grid-post_link">
+            <>
+              <ul className="grid-container">
+                <>
+                  {currentUser?.save.length === 0 ? (
+                    <div className="lg:w-[740px] lg:h-[500px] w-[257px] h-72 rounded-lg bg-dark-2 flex items-center justify-center flex-col">
                       <img
-                        src={post.imageUrl}
-                        alt="post"
-                        className="h-full w-full object-cover"
+                        src="/assets/icons/posts.svg"
+                        alt="posts"
+                        className="md:w-20 md:h-20 w-14 h-14"
                       />
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+                      <p className="h3-bold md:h2-bold text-light-3">
+                        No Saved posts yet
+                      </p>
+                    </div>
+                  ) : (
+                    currentUser?.save.map(
+                      (item: Models.Document, index: number) => (
+                        <li
+                          className="relative min-w-64 h-64"
+                          key={`saved-${index}`}
+                        >
+                          <div className="grid-post_link">
+                            <img
+                              src={item?.post?.imageUrl}
+                              alt="saved_post"
+                              className="w-full h-full object-cover object-top"
+                            />
+                          </div>
+                        </li>
+                      )
+                    )
+                  )}
+                </>
+              </ul>
+            </>
           )}
         </div>
       </div>

@@ -199,6 +199,10 @@
     @apply w-full px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xs:grid-cols-2 xl:grid-cols-3 gap-6 max-w-5xl overflow-scroll custom-scrollbar;
   }
 
+  .profile-saved-grid {
+    @apply w-full px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xs:grid-cols-2  gap-6 max-w-5xl overflow-scroll custom-scrollbar;
+  }
+
   /* Bottom bar */
   .bottom-bar {
     @apply z-50 flex-between w-full sticky bottom-0 rounded-t-[20px] bg-dark-2 px-5 py-4 md:hidden;
@@ -301,6 +305,6 @@
   }
 
   .shad-logout-button {
-    @apply flex py-7 gap-4 items-center justify-start bg-transparent hover:bg-red transition !important;
+    @apply flex py-7 gap-4 items-center justify-start bg-transparent hover:bg-red/80 transition !important;
   }
 }
