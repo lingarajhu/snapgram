@@ -304,6 +304,10 @@
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
   }
 
+  .gosh {
+    @apply flex items-center;
+  }
+
   .shad-logout-button {
     @apply flex py-7 gap-4 items-center justify-start bg-transparent hover:bg-red/80 transition !important;
   }
