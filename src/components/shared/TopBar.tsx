@@ -35,7 +35,11 @@ const TopBar = () => {
         <div className="flex gap-1">
           <Link to={`/profile/${user.id}`} className="flex-center gap-2 -mr-1">
             <img
-              src={user.imageUrl || "/assets/icons/profile-placeholder.svg"}
+              src={
+                user.imageUrl
+                  ? user.imageUrl
+                  : "/assets/icons/profile-placeholder.svg"
+              }
               alt="profile picture"
               className="h-8 w-8 rounded-full"
             />
