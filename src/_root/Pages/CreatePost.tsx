@@ -1,17 +1,6 @@
 import PostForm from "@/components/forms/PostForm";
-import { useUserContext } from "@/context/AuthContext";
-import { useEffect } from "react";
-import { Navigate } from "react-router-dom";
 
 const CreatePost = () => {
-  const { user } = useUserContext();
-
-  useEffect(() => {
-    if (!user) {
-      <Navigate to={"/sign-in"} />;
-    }
-  }, [user]);
-
   return (
     <div className="flex flex-1">
       <div className="common-container">
