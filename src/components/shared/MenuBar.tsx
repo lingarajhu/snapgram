@@ -43,6 +43,10 @@ const MenuBar: React.FC<MenuBarProps> = ({
         >
           Logout
         </Button>
+        <p className="text-sm -mt-3 text-center text-gray-400">
+          © 2024{" "}
+          <span className="text-primary-500/90">snapgram_by_lingraj</span>
+        </p>
       </div>
     </div>
   );
